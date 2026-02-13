@@ -1,0 +1,117 @@
+[
+    {
+        "producto": "torta",
+        "cantidad": 2,
+        "precio_unitario": 800.0,
+        "total": 1600.0,
+        "fecha": "2025-07-25 23:50:47"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "torta",
+                "cantidad": 3,
+                "precio": 800.0
+            },
+            {
+                "nombre": "cafe con leche",
+                "cantidad": 1,
+                "precio": 600.0
+            }
+        ],
+        "total": 3000.0,
+        "fecha": "2025-07-26 02:49:16"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "torta",
+                "cantidad": 6,
+                "precio": 800.0
+            }
+        ],
+        "total": 4800.0,
+        "fecha": "2025-07-26 02:49:43"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "torta",
+                "cantidad": 3,
+                "precio": 800.0
+            },
+            {
+                "nombre": "torta",
+                "cantidad": 6,
+                "precio": 800.0
+            },
+            {
+                "nombre": "cafe con leche",
+                "cantidad": 3,
+                "precio": 600.0
+            }
+        ],
+        "total": 9000.0,
+        "fecha": "2025-07-26 02:51:06"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "torta",
+                "cantidad": 2,
+                "precio": 800.0
+            }
+        ],
+        "total": 1600.0,
+        "fecha": "2025-07-26 04:14:16"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "galletas",
+                "cantidad": 2,
+                "precio": 300.0
+            },
+            {
+                "nombre": "chocolatada",
+                "cantidad": 2,
+                "precio": 500.0
+            }
+        ],
+        "total": 1600.0,
+        "fecha": "2025-07-26 04:15:56"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "torta",
+                "cantidad": 4,
+                "precio": 800.0
+            }
+        ],
+        "total": 3200.0,
+        "fecha": "2025-07-26 11:46:00"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "cafe con leche",
+                "cantidad": 4,
+                "precio": 600.0
+            }
+        ],
+        "total": 2400.0,
+        "fecha": "2025-07-26 11:51:56"
+    },
+    {
+        "productos": [
+            {
+                "nombre": "chocolatada",
+                "cantidad": 2,
+                "precio": 500.0
+            }
+        ],
+        "total": 1000.0,
+        "fecha": "2025-07-26 16:13:05"
+    }
+]

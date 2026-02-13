@@ -1,0 +1,10 @@
+======== TICKET DE VENTA CAFETERÍA ========
+
+Producto: chocolatada
+Precio unitario: $500.00
+Cantidad: 2
+Subtotal: $1000.00
+
+Total: $1000.00
+Fecha: 2025-07-26 16:13:05
+===========================================

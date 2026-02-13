@@ -1,0 +1,7 @@
+{
+    "cafe": {
+        "cantidad": 3000.0,
+        "unidad": "g",
+        "minimo": 1000.0
+    }
+}

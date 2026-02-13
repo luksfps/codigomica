@@ -1,0 +1,140 @@
+Funciones en cafeteria/app.py
+
+Clase: CafeteriaApp
+- __init__(self, root):
+  - Inicializa la ventana principal `root`.
+  - Crea instancias de `Inventario`, `Productos` y `Ventas`.
+  - Llama a `crear_widgets()` para armar el menú principal.
+
+- crear_widgets(self):
+  - Construye la interfaz principal con botones que abren las subventanas:
+    - "Gestionar ingredientes"
+    - "Gestionar productos"
+    - "Registrar venta"
+    - "Ver historial de tickets"
+    - "Salir"
+
+- gestionar_ingredientes(self):
+  - Abre (o trae al frente) una ventana `Toplevel` para gestionar ingredientes.
+  - Muestra la lista de ingredientes en un `Text` mediante `mostrar_ingredientes_gui()`.
+  Funciones internas y acciones en esta ventana:
+    - mostrar_ingredientes_gui(): actualiza el `Text` con los ingredientes y sus datos.
+    - Selector `OptionMenu` (si hay ingredientes): permite elegir un ingrediente existente.
+    - agregar_stock(): pide cantidad y unidad por diálogos y suma stock llamando a
+      `Inventario.ingredientes.agregar_ingredientes(...)`. Guarda y actualiza la vista.
+    - reducir_stock(): pide cantidad a reducir; si la reducción deja 0 o menos, pregunta
+      para eliminar el ingrediente; en otro caso resta la cantidad y guarda.
+    - eliminar_ingrediente(): confirma y elimina el ingrediente del diccionario y guarda.
+    - agregar_nuevo_ingrediente_dialog(): abre una serie de diálogos (nombre, cantidad,
+      unidad, mínimo) y crea un nuevo ingrediente usando `agregar_ingredientes`.
+  - Todas las acciones intentan refrescar la ventana (cerrando y volviéndola a abrir) para
+    mostrar cambios.
+
+- gestionar_productos(self):
+  - Abre (o trae al frente) una ventana `Toplevel` para gestionar productos.
+  - Muestra productos con precio, rinde e ingredientes usando `mostrar_productos_gui()`.
+  - Si hay productos, crea un `OptionMenu` para seleccionar uno y ofrece:
+    - eliminar_producto_seleccionado(): elimina el producto seleccionado del diccionario
+      `self.productos.productos` y guarda con `guardar_productos()`.
+    - editar_producto_seleccionado(): abre diálogos para editar precio (`precio_unitario`),
+      rinde y los ingredientes (como cadena `ing:cant,ing2:cant2`). Actualiza el dict y guarda.
+    - agregar_nuevo_producto_dialog(): abre diálogos para nombre, precio, rinde y una cadena
+      de ingredientes en formato `ing:cantidad,...`; valida existencia previa y agrega
+      mediante `self.productos.agregar_producto(...)`.
+  - Al editar/crear/eliminar se guarda el archivo de productos y se refresca la ventana.
+
+- registrar_venta(self):
+  - Abre (o trae al frente) una ventana para registrar una venta.
+  - Muestra un `OptionMenu` con productos disponibles y un campo para cantidad.
+  - confirmar_venta(): valida la cantidad, llama a `self.productos.verificar_disponibilidad`
+    para comprobar ingredientes, descuenta ingredientes con `descontar_ingredientes`,
+    añade un registro a `self.ventas.ventas` (con `producto`, `cantidad`, `precio_unitario`,
+    `total`, `fecha`) y muestra el total. Refresca ventanas abiertas de ingredientes/productos.
+
+- ver_historial(self):
+  - Abre (o trae al frente) una ventana que lista las ventas registradas en `self.ventas.ventas`.
+  - Inserta cada venta en un `Text` y construye un `OptionMenu` con una representación breve
+    ("índice - producto - total - fecha").
+  - eliminar_venta_seleccionada(): elimina la venta seleccionada por índice de la lista,
+    guarda con `self.ventas.guardar_ventas()` y refresca la vista.
+
+Bloque principal
+- if __name__ == "__main__":
+  - Crea `tk.Tk()`, instancia `CafeteriaApp(root)` y ejecuta `root.mainloop()`.
+
+Dependencias / llamadas a otras clases
+- `Inventario` (desde `inventario.Inventario`): se asume que contiene un atributo `ingredientes`
+  que expone métodos como `agregar_ingredientes`, `guardar_ingredientes`, `descontar_ingredientes`.
+- `Productos` (desde `productos.Productos`): se usa para leer/guardar productos y para
+  verificar disponibilidad/descontar ingredientes.
+- `Ventas` (desde `ventas.Ventas`): mantiene la lista `ventas` y funciones para guardar y
+  generar tickets.
+
+Notas rápidas sobre comportamiento
+- Muchas acciones en las subventanas cierran y reabren la ventana para "refrescar" la UI.
+- Al agregar stock se reutiliza `agregar_ingredientes(...)`, por lo que la unidad indicada
+  debe ser compatible con la unidad existente del ingrediente (el método valida/convierte).
+- La edición de ingredientes/ingredientes de producto utiliza un formato de texto simple
+  `ing:cant,ing2:cant2` en los diálogos; errores de formato muestran un mensaje de error.
+
+Si querés, puedo generar ahora una versión en formato Markdown o incorporar esta documentación
+en README del proyecto.
+
+Explicación de patrones y llamadas comunes usadas en `app.py`
+
+- `hasattr(self, 'attr')`:
+  - Comprueba si el objeto `self` tiene el atributo llamado `attr`.
+  - Se usa aquí para detectar si ya se creó una ventana (por ejemplo `ventana_ing`) y
+    evitar crear una nueva instancia duplicada.
+
+- `getattr(self, 'attr')`:
+  - Obtiene el valor del atributo `attr` de `self` si existe; evita excepción si no existe.
+  - A menudo se compara con `None` para asegurarse de que la referencia sea válida.
+
+- `winfo_exists()`:
+  - Método de widgets Tkinter que devuelve `True` si la ventana todavía existe (no fue
+    destruida). Se usa para verificar que una `Toplevel` siga viva antes de interactuar.
+
+- `deiconify()`:
+  - Restaura una ventana minimizada/oculta. Útil para traer de vuelta una `Toplevel` sin
+    recrearla.
+
+- `lift()`:
+  - Trae la ventana al frente del orden de ventanas (la coloca por encima de otras).
+
+- `focus_force()`:
+  - Intenta forzar el foco de teclado a la ventana; mejora la interacción cuando se
+    reabre una ventana existente.
+
+- `try/except`:
+  - Manejo de excepciones en Python; evita que errores interrumpan la aplicación y
+    permite mostrar mensajes de error amigables con `messagebox`.
+
+- `simpledialog.askstring/askfloat/askinteger`:
+  - Funciones que abren diálogos modales para pedir al usuario texto o números.
+  - Devuelven `None` si el usuario cancela; el código valida este caso.
+
+- `messagebox.showinfo/showerror/showwarning/askyesno`:
+  - Diálogos para informar al usuario, mostrar errores/adviertos o pedir confirmación.
+
+- `tk.OptionMenu` y `tk.StringVar`:
+  - `OptionMenu` crea un menú desplegable (selector). `StringVar` enlaza la opción
+    seleccionada y permite leer/escribir su valor.
+
+- `tk.Toplevel`:
+  - Crea una ventana independiente secundaria sobre la principal (`Tk`). Se usa para
+    las pantallas de gestión (ingredientes, productos, ventas, historial).
+
+- Uso de métodos `guardar_*` y estructuras (`self.productos.productos`, `self.ventas.ventas`):
+  - Los objetos `Ingredientes`, `Productos` y `Ventas` gestionan la persistencia (archivos
+    JSON) mediante métodos como `guardar_ingredientes()`, `guardar_productos()` y
+    `guardar_ventas()`. Las ventanas llaman a estos métodos después de modificar los
+    diccionarios en memoria para persistir los cambios.
+
+- Formato de edición de ingredientes/productos:
+  - Para simplificar la edición en diálogos se utiliza el formato `ing:cantidad,ing2:cantidad`.
+  - El código parsea esta cadena y la convierte en un diccionario; errores de formato se
+    capturan y se notifican con `messagebox`.
+
+Si querés que añada ejemplos cortos de uso para cada patrón o que lo incluya en la README,
+los agrego ahora.

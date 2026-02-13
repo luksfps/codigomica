@@ -1,0 +1,10 @@
+======== TICKET DE VENTA CAFETERÍA ========
+
+Producto: pan
+Precio unitario: $300.00
+Cantidad: 1
+Subtotal: $300.00
+
+Total: $300.00
+Fecha: 2025-07-28 14:05:08
+===========================================

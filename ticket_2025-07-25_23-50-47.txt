@@ -1,0 +1,7 @@
+====== TICKET DE VENTA CAFETERIA ======
+Producto: torta
+Cantidad: 2
+Precio unitario: $800.00
+Total: $1600.00
+Fecha: 2025-07-25 23:50:47
+=============================

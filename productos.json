@@ -1,0 +1,60 @@
+{
+    "cafe con leche": {
+        "ingredientes": {
+            "cafe": 50.0,
+            "leche": 200.0
+        },
+        "precio_unitario": 600.0,
+        "rinde": 1
+    },
+    "torta": {
+        "ingredientes": {
+            "harina": 789.0,
+            "azucar": 190.0,
+            "huevo": 4.0
+        },
+        "precio_unitario": 567.0,
+        "rinde": 6
+    },
+    "galletas": {
+        "ingredientes": {
+            "harina": 150,
+            "azucar": 50,
+            "manteca": 100
+        },
+        "precio_unitario": 300.0,
+        "rinde": 6
+    },
+    "chocolatada": {
+        "ingredientes": {
+            "leche": 500.0,
+            "chocolate": 25.0
+        },
+        "precio_unitario": 500.0,
+        "rinde": 1
+    },
+    "jk": {
+        "ingredientes": {
+            "leche": 500.0,
+            "cacao": 20.0
+        },
+        "precio_unitario": 789.0,
+        "rinde": 6
+    },
+    "pan": {
+        "ingredientes": {
+            "huevo": 15.0,
+            "harina": 300.0
+        },
+        "precio_unitario": 300.0,
+        "rinde": 1
+    },
+    "batido": {
+        "ingredientes": {
+            "leche": 300.0,
+            "galleta": 45.0
+        },
+        "precio_unitario": 500.0,
+        "rinde": 1
+    }
+}

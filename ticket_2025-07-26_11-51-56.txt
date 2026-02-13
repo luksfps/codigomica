@@ -1,0 +1,10 @@
+======== TICKET DE VENTA CAFETERÍA ========
+
+Producto: cafe con leche
+Precio unitario: $600.00
+Cantidad: 4
+Subtotal: $2400.00
+
+Total: $2400.00
+Fecha: 2025-07-26 11:51:56
+===========================================
